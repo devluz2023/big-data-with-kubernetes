@@ -1,0 +1,118 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: app-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: app-sender-virtualservice
+  namespace: product
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/app-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /app-sender
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: app-sender
+        port:
+          number: 80
+
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: app-receiver-virtualservice
+  namespace: product
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/app-gateway
+  http:
+  - match:
+    - uri:
+        exact: /app-receiver
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: app-receiver
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /app-receiver/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: app-receiver
+        port:
+          number: 80
+
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: app-receiver-virtualservice
+#   namespace: product
+# spec:
+#   hosts:
+#   - "*"
+#   gateways:
+#   - istio-system/app-gateway
+#   http:
+#   - match:
+#     - uri:
+#         prefix: /app-receiver
+#     rewrite:
+#       uri: "/"
+#     route:
+#     - destination:
+#         host: app-receiver
+#         port:
+#           number: 80
+
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: app-orchestrating-virtualservice
+  namespace: product
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/app-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /app-orchestrating
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: app-orchestrating
+        port:
+          number: 80
