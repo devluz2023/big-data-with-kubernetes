@@ -203,3 +203,9 @@ curl -kv https://app-receiver.com/app-receiver/app-receiver/hello --resolve "app
 
 
 kubectl exec -n product -it app-receiver-v1-86f8cfd548-hxpvv  -- curl -v http://app-receiver:80/app-receiver/hello
+
+
+
+istioctl dashboard jaeger
+istioctl dashboard prometheus
+istioctl dashboard kiali

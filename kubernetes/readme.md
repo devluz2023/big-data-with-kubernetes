@@ -72,3 +72,11 @@ curl -kv https://app-sender.com/app-sender --resolve "app-sender.com:443:10.110.
 
 base64 -w0 evostack_certs1/evostack.app.com.crt
 base64 -w0 evostack_certs1/evostack.app.com.key
+
+
+# Istio dashboard
+
+istioctl dashboard jaeger
+istioctl dashboard prometheus
+istioctl dashboard kiali
+istioctl dashboard grafana

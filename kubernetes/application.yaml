@@ -58,6 +58,7 @@ metadata:
   labels:
     app: app-sender
     version: v1
+    update: "1"
 spec:
   replicas: 1
   selector:
@@ -110,6 +111,7 @@ metadata:
   labels:
     app: app-receiver
     version: v1
+    update: "1"
 spec:
   replicas: 1
   selector:
@@ -162,6 +164,7 @@ metadata:
   labels:
     app: app-orchestrating
     version: v1
+    update: "1"
 spec:
   replicas: 1
   selector:
@@ -172,7 +175,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "9080"
+        prometheus.io/port: "80"
         prometheus.io/path: "/metrics"
       labels:
         app: app-orchestrating
