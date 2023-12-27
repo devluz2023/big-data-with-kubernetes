@@ -1,1 +1,6 @@
 kubernetes/istio-1.20.1
+kubernetes/evostack_certs1/evostack.app.com.crt
+kubernetes/evostack_certs1/evostack.app.com.csr
+kubernetes/evostack_certs1/evostack.app.com.key
+kubernetes/evostack_certs1/evostack.com.crt
+kubernetes/evostack_certs1/evostack.com.key
