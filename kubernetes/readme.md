@@ -9,6 +9,9 @@
 6. `kubectl label namespace product istio-injection=enabled`
 7. `kubectl config set-context --current --namespace=product`
 
+
+export PATH="~/Documents/GitHub/big-data-with-kubernetes/kubernetes/istio-1.20.1/bin"
+
 export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
 export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].port}')
@@ -46,16 +49,16 @@ log de pod should be clear logs from last 24 hs
 mkdir evostack_certs1
 
 
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=evostack Inc./CN=evostack.com' -keyout evostack_certs1/evostack.com.key -out evostack_certs1/evostack.com.crt
+`openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=evostack Inc./CN=evostack.com' -keyout evostack_certs1/evostack.com.key -out evostack_certs1/evostack.com.crt`
 
-openssl req -out evostack_certs1/evostack.app.com.csr -newkey rsa:2048 -nodes -keyout evostack_certs1/evostack.app.com.key -subj "/CN=evostack.app.com/O=httpbin organization"
+`openssl req -out evostack_certs1/evostack.app.com.csr -newkey rsa:2048 -nodes -keyout evostack_certs1/evostack.app.com.key -subj "/CN=evostack.app.com/O=httpbin organization"`
 
-openssl x509 -req -sha256 -days 365 -CA evostack_certs1/evostack.com.crt -CAkey evostack_certs1/evostack.com.key -set_serial 0 -in evostack_certs1/evostack.app.com.csr -out evostack_certs1/evostack.app.com.crt
+`openssl x509 -req -sha256 -days 365 -CA evostack_certs1/evostack.com.crt -CAkey evostack_certs1/evostack.com.key -set_serial 0 -in evostack_certs1/evostack.app.com.csr -out evostack_certs1/evostack.app.com.crt`
 
 
-kubectl create -n istio-system secret tls httpbin-credential \
+`kubectl create -n istio-system secret tls httpbin-credential \
   --key=evostack_certs1/evostack.app.com.key \
-  --cert=evostack_certs1/evostack.app.com.crt
+  --cert=evostack_certs1/evostack.app.com.crt`
 
 
 

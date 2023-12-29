@@ -189,4 +189,57 @@ spec:
           - containerPort: 80
         imagePullPolicy: Always
         
-       
+
+---
+##################################################################################################
+# App Gateay
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: internal-application-gateway
+  labels:
+    app: internal-application-gateway
+    service: internal-application-gateway
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    name: http
+  selector:
+    app: internal-application-gateway
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bank-internal-application-gateway
+  labels:
+    account: internal-application-gateway
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: internal-application-gateway-v1
+  labels:
+    app: internal-application-gateway
+    version: v1
+    update: "1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: internal-application-gateway
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: internal-application-gateway
+        version: v1
+    spec:
+      serviceAccountName: bank-internal-application-gateway
+      containers:
+      - name: internal-application-gateway
+        image: fabiojdluz/api-gateway:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
