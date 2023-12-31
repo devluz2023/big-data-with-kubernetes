@@ -296,7 +296,7 @@ spec:
       serviceAccountName: bank-app-hook
       containers:
       - name: app-hook
-        image: fabiojdluz/app-hook:v3
+        image: fabiojdluz/app-hook:v1
         ports:
           - containerPort: 3000
         imagePullPolicy: Always

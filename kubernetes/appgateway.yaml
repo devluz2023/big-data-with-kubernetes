@@ -120,7 +120,7 @@ spec:
 
     - match:
         - uri:
-            prefix: "/app-ochestrating/"
+            prefix: "/app-orchestrating/"
       rewrite:
         uri: "/"
       route:
