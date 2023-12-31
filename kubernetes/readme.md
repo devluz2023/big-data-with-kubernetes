@@ -56,6 +56,20 @@ set product as context
 ## to get istio ip
 1. `kubectl get svc -n istio-system istio-ingressgateway`
 
+15. install prometheus
+`kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.20/samples/addons/prometheus.yaml`
+
+16. install kiali 
+`kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.20/samples/addons/kiali.yaml`
+
+167. run kiali 
+`istioctl dashboard kiali`
+# Istio dashboard
+
+istioctl dashboard jaeger
+istioctl dashboard prometheus
+istioctl dashboard kiali
+istioctl dashboard grafana
 ```
 
 criar tres servicos
