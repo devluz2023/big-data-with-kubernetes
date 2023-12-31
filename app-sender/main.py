@@ -1,17 +1,23 @@
 # main.py
 from fastapi import FastAPI
 from prometheus_fastapi_instrumentator import Instrumentator
-
+from fastapi.openapi.docs import get_swagger_ui_html
 app = FastAPI()
 
 # Instrumentator setup
 Instrumentator().instrument(app).expose(app)
 
 
+
 import httpx
 # receiver_service_url = "http://app-receiver:80/app-receiver/sender"
 receiver_service_url = "http://app-receiver:80/app-receiver/sender"
 
+
+@app.get("/swagger", include_in_schema=False)
+def overridden_swagger():
+    # return get_swagger_ui_html(openapi_url="/app-sender/openapi.json", title="My API")
+    return get_swagger_ui_html(openapi_url="localhost:8000/openapi.json", title="My API")
 
 @app.get("/")
 def read_root():

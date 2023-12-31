@@ -74,7 +74,7 @@ spec:
       serviceAccountName: bank-app-sender
       containers:
       - name: app-sender
-        image: fabiojdluz/app-sender:latest
+        image: fabiojdluz/app-sender:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
