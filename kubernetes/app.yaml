@@ -127,7 +127,7 @@ spec:
       serviceAccountName: bank-app-receiver
       containers:
       - name: app-receiver
-        image: fabiojdluz/app-receiver:latest
+        image: fabiojdluz/app-receiver:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -184,7 +184,7 @@ spec:
       serviceAccountName: bank-app-orchestrating
       containers:
       - name: app-orchestrating
-        image: fabiojdluz/app-orchestrating:latest
+        image: fabiojdluz/app-orchestrating:v2
         ports:
           - containerPort: 80
         imagePullPolicy: Always

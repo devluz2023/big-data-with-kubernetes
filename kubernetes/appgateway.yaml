@@ -52,53 +52,82 @@ spec:
   gateways:
   - istio-system/app-gateway
   http:
-  # Route for Swagger UI
-  - match:
-    - uri:
-        exact: "/app-receiver"
-    rewrite:
-      uri: "/"
-    route:
-    - destination:
-        host: app-receiver
-        port:
-          number: 80
+    - match:
+        - uri:
+            prefix: "/app-receiver/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: app-receiver
+            port:
+              number: 80
 
-  # Route for OpenAPI JSON
-  - match:
-    - uri:
-        exact: "/app-sender/openapi.json"
-    rewrite:
-      uri: "/openapi.json"
-    route:
-    - destination:
-        host: app-sender
-        port:
-          number: 80
+    - match:
+        - uri:
+            exact: "/app-receiver/openapi.json"
+      rewrite:
+        uri: "/openapi.json"
+      route:
+        - destination:
+            host: app-receiver
+            port:
+              number: 80
+          
+    - match:
+        - uri:
+            exact: "/app-sender/openapi.json"
+      rewrite:
+        uri: "/openapi.json"
+      route:
+        - destination:
+            host: app-sender
+            port:
+              number: 80
 
-  # General route for app-sender
-  - match:
-    - uri:
-        prefix: "/app-sender/"
-    rewrite:
-      uri: "/"
-    route:
-    - destination:
-        host: app-sender
-        port:
-          number: 80
+    - match:
+        - uri:
+            prefix: "/app-sender/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: app-sender
+            port:
+              number: 80
 
+    - match:
+        - uri:
+            prefix: "/app-hook/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: app-hook
+            port:
+              number: 80
 
-  - match:
-    - uri:
-        prefix: "/app-hook/"
-    rewrite:
-      uri: "/"
-    route:
-    - destination:
-        host: app-hook
-        port:
-          number: 80
+    - match:
+        - uri:
+            exact: "/app-orchestrating/openapi.json"
+      rewrite:
+        uri: "/openapi.json"
+      route:
+        - destination:
+            host: app-orchestrating
+            port:
+              number: 80
+
+    - match:
+        - uri:
+            prefix: "/app-ochestrating/"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: app-orchestrating
+            port:
+              number: 80
 
   # ... other routes ...
 
