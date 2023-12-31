@@ -1,5 +1,5 @@
 
-
+```bash
 ## dowload istio 
 1. Dowload To Istio
 `curl -L https://istio.io/downloadIstio | sh -`
@@ -55,6 +55,8 @@ set product as context
 
 ## to get istio ip
 1. `kubectl get svc -n istio-system istio-ingressgateway`
+
+```
 
 criar tres servicos
 e acessos externamente

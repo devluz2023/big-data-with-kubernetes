@@ -55,12 +55,12 @@ spec:
   # Route for Swagger UI
   - match:
     - uri:
-        exact: "/app-sender/docs"
+        exact: "/app-receiver"
     rewrite:
-      uri: "/docs"
+      uri: "/"
     route:
     - destination:
-        host: app-sender
+        host: app-receiver
         port:
           number: 80
 
@@ -85,6 +85,18 @@ spec:
     route:
     - destination:
         host: app-sender
+        port:
+          number: 80
+
+
+  - match:
+    - uri:
+        prefix: "/app-hook/"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: app-hook
         port:
           number: 80
 

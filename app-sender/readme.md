@@ -2,9 +2,9 @@ docker build -t app-sender .
 docker run -d --name app-sender -p 81:80 app-sender
 
 docker build -t app-sender .
-docker tag app-sender:latest fabiojdluz/app-sender:latest
-docker push fabiojdluz/app-sender:latest
-docker pull fabiojdluz/app-sender:v1
+docker tag app-sender:latest fabiojdluz/app-sender:v4
+docker push fabiojdluz/app-sender:v4
+docker pull fabiojdluz/app-sender:v4
 docker run -d --name app-sender -p 81:80 fabiojdluz/app-sender
  
 
